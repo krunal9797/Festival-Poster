@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "142726409576",
+    "firebase_url": "https://festival-post-58dc1-default-rtdb.firebaseio.com",
+    "project_id": "festival-post-58dc1",
+    "storage_bucket": "festival-post-58dc1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:142726409576:android:ab3fedd3e9769098defadd",
+        "android_client_info": {
+          "package_name": "com.example.festival_post"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0giDefr_EMA5ce3mXJofzP6cTmQfcBvA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

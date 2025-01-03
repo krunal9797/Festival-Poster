@@ -1,0 +1,65 @@
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+ext {
+    compileSdkVersion   = 34
+    targetSdkVersion    = 34
+    appCompatVersion    = "1.7.0"
+}
+
+rootProject.buildDir = "../build"
+subprojects {
+    afterEvaluate { project ->
+        // check only for "com.android.library" to not modify
+        // your "app" subproject. All plugins will have "com.android.library" plugin, and only your app "com.android.application"
+        // Change your application's namespace in main build.gradle and in main android block.
+
+        if (project.plugins.hasPlugin("com.android.library")) {
+            project.android {
+                if (namespace == null) {
+                    namespace project.group
+                }
+            }
+        }
+    }
+}
+subprojects {
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile) {
+        kotlinOptions.jvmTarget = "1.8"
+    }
+}
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+// add These lines from here. in android/build.gradle  (NOT android/app/build.gradle)
+subprojects {
+    afterEvaluate { project ->
+        if (project.plugins.hasPlugin("com.android.application") ||
+                project.plugins.hasPlugin("com.android.library")) {
+            project.android {
+                compileSdkVersion 34
+                buildToolsVersion "34.0.0"
+            }
+        }
+    }
+}
+// to here
+subprojects {
+    project.evaluationDependsOn(":app")
+}
+configurations.all {
+    resolutionStrategy {
+        force 'androidx.core:core:1.6.0'
+        force 'androidx.appcompat:appcompat:1.3.0'
+        force 'androidx.core:core-ktx:1.6.0'
+    }
+}
+
+
+
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}
